@@ -38,6 +38,11 @@ jobs:
     strategy:
       matrix:
         flink: [ 1.17.1, 1.18.0 ]
-    uses: apache/flink-connector-shared-utils/.github/workflows/python_ci.yml@ci_utils
+        jdk: [ 8, 11, 17 ]
+        exclude:
+          - jdk: 17
+            flink: 1.17.1
+    uses: snuyanzin/flink-connector-shared-utils/.github/workflows/python_ci.yml@jdk_for_python
     with:
       flink_version: ${{ matrix.flink }}
+      jdk_version: ${{ matrix.jdk }}
